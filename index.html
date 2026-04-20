@@ -1,221 +1,260 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Escape Room Game - Terminal</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Escape Room Game - Terminal</title>
 
-        body {
-            font-family: 'Courier New', monospace;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            background-attachment: fixed;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow-x: hidden;
-            color: #00ff88;
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
+body {
+    font-family: 'Courier New', monospace;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #00ff88;
+}
 
-        .star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: white;
-            border-radius: 50%;
-            animation: twinkle 3s infinite;
-        }
+/* STARS */
+.stars {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
 
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 3s infinite;
+}
 
-        .container {
-            position: relative;
-            z-index: 1;
-            max-width: 700px;
-            width: 90%;
-            background: rgba(15, 12, 41, 0.9);
-            border: 2px solid #00ff88;
-            border-radius: 15px;
-            padding: 40px;
-            box-shadow: 0 0 40px rgba(0, 255, 136, 0.3), inset 0 0 30px rgba(0, 255, 136, 0.1);
-            animation: slideIn 0.6s ease-out;
-            backdrop-filter: blur(10px);
-            text-align: center;
-        }
+@keyframes twinkle {
+    0%,100%{opacity:0.3;}
+    50%{opacity:1;}
+}
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+/* CONTAINER */
+.container {
+    max-width: 700px;
+    width: 90%;
+    background: rgba(15,12,41,0.9);
+    border: 2px solid #00ff88;
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 0 40px rgba(0,255,136,0.3);
+    text-align: center;
+}
 
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 0 0 20px rgba(0, 255, 136, 0.8);
-            letter-spacing: 3px;
-        }
+/* TITLE */
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-shadow: 0 0 20px #00ff88;
+    animation: glow 2s infinite;
+}
 
-        .subtitle {
-            color: #00ccff;
-            font-size: 0.9em;
-            margin-bottom: 30px;
-        }
+@keyframes glow {
+    0%,100%{text-shadow:0 0 20px #00ff88;}
+    50%{text-shadow:0 0 40px #00ff88;}
+}
 
-        .timer-container {
-            margin: 30px 0;
-        }
+.subtitle {
+    color:#00ccff;
+    margin-bottom:30px;
+}
 
-        #time {
-            font-size: 2.5em;
-            font-weight: bold;
-        }
+/* START BUTTON */
+#startButton {
+    padding: 15px 40px;
+    font-size: 1.2em;
+    background: linear-gradient(135deg,#00ff88,#00ccff);
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    transition:0.3s;
+}
 
-        .hint {
-            background: rgba(0, 255, 136, 0.1);
-            border-left: 3px solid #00ff88;
-            padding: 15px;
-            margin: 25px 0;
-        }
+#startButton:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 25px #00ff88;
+}
 
-        .input-group {
-            display: flex;
-            gap: 10px;
-            margin: 25px 0;
-        }
+/* GAME CONTENT */
+.hidden {
+    display:none;
+}
 
-        input {
-            flex: 1;
-            padding: 10px;
-            background: black;
-            border: 2px solid #00ff88;
-            color: #00ff88;
-        }
+.timer-container {
+    margin: 30px 0;
+}
 
-        button {
-            padding: 12px 25px;
-            background: #00ff88;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-        }
+#time {
+    font-size: 2.5em;
+    font-weight: bold;
+    animation: pulse 1s infinite;
+}
 
-        .result {
-            margin-top: 20px;
-            display: none;
-        }
-    </style>
+@keyframes pulse {
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.1);}
+}
+
+.hint {
+    background: rgba(0,255,136,0.1);
+    border-left:3px solid #00ff88;
+    padding:15px;
+    margin:20px 0;
+    animation: slideIn 1s;
+}
+
+@keyframes slideIn {
+    from{opacity:0;transform:translateX(-20px);}
+    to{opacity:1;transform:translateX(0);}
+}
+
+.input-group {
+    display:flex;
+    gap:10px;
+}
+
+input {
+    flex:1;
+    padding:10px;
+    background:black;
+    border:2px solid #00ff88;
+    color:#00ff88;
+}
+
+button.submit {
+    padding:10px 20px;
+    background:#00ff88;
+    border:none;
+    cursor:pointer;
+}
+
+/* RESULT */
+.result {
+    margin-top:20px;
+    display:none;
+    font-weight:bold;
+    animation: pop 0.5s;
+}
+
+@keyframes pop {
+    from{transform:scale(0.8);opacity:0;}
+    to{transform:scale(1);opacity:1;}
+}
+</style>
 </head>
+
 <body>
 
 <div class="stars" id="stars"></div>
 
 <div class="container">
-    <h1>⚡ ESCAPE ROOM ⚡</h1>
-    <div class="subtitle">&gt;&gt;&gt; SYSTEM LOCKDOWN MODE &lt;&lt;&lt;</div>
+<h1>⚡ ESCAPE ROOM ⚡</h1>
+<div class="subtitle">&gt;&gt;&gt; SYSTEM LOCKDOWN MODE &lt;&lt;&lt;</div>
 
-    <!-- ALOITUSNAPPI -->
-    <button id="startButton">▶ ALOITA</button>
+<button id="startButton">▶ ALOITA</button>
 
-    <!-- PELI (PIILOSSA ALUKSI) -->
-    <div id="gameContent" style="display:none;">
+<div id="gameContent" class="hidden">
 
-        <div class="timer-container">
-            ⏱️ TIME: <span id="time">300</span>s
-        </div>
+<div class="timer-container">
+⏱️ TIME: <span id="time">300</span>s
+</div>
 
-        <div class="hint">
-            💡 HINT: A single word can unlock the system...
-        </div>
+<div class="hint">
+💡 A single word unlocks the system...
+</div>
 
-        <div class="input-group">
-            <input type="text" id="codeword" placeholder="Enter codeword">
-            <button id="submit">SUBMIT</button>
-        </div>
+<div class="input-group">
+<input type="text" id="codeword">
+<button class="submit" id="submit">SUBMIT</button>
+</div>
 
-    </div>
+</div>
 
-    <div class="result" id="result"></div>
+<div id="result" class="result"></div>
 </div>
 
 <script>
-    // Stars
-    function generateStars() {
-        const starsContainer = document.getElementById('stars');
-        for (let i = 0; i < 100; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            star.style.left = Math.random() * 100 + '%';
-            star.style.top = Math.random() * 100 + '%';
-            starsContainer.appendChild(star);
-        }
+// STARS
+function generateStars(){
+    const c=document.getElementById('stars');
+    for(let i=0;i<100;i++){
+        const s=document.createElement('div');
+        s.className='star';
+        s.style.left=Math.random()*100+'%';
+        s.style.top=Math.random()*100+'%';
+        s.style.animationDelay=Math.random()*3+'s';
+        c.appendChild(s);
     }
-    generateStars();
+}
+generateStars();
 
-    let timeLeft = 300;
-    let timer = null;
+let timeLeft=300;
+let timer=null;
 
-    const timerDisplay = document.getElementById('time');
-    const resultDiv = document.getElementById('result');
-    const submitButton = document.getElementById('submit');
-    const codewordInput = document.getElementById('codeword');
-    const correctCodeword = 'REVEAL';
+const timeEl=document.getElementById('time');
+const result=document.getElementById('result');
+const submit=document.getElementById('submit');
+const input=document.getElementById('codeword');
 
-    const startButton = document.getElementById('startButton');
-    const gameContent = document.getElementById('gameContent');
+const startBtn=document.getElementById('startButton');
+const game=document.getElementById('gameContent');
 
-    // START BUTTON
-    startButton.addEventListener('click', () => {
-        gameContent.style.display = 'block';
-        startButton.style.display = 'none';
+const correct="REVEAL";
 
-        timer = setInterval(() => {
+// START
+startBtn.onclick=()=>{
+    startBtn.style.display='none';
+    game.classList.remove('hidden');
+
+    // pieni dramaattinen viive 😏
+    setTimeout(()=>{
+        timer=setInterval(()=>{
             timeLeft--;
-            timerDisplay.textContent = timeLeft;
+            timeEl.textContent=timeLeft;
 
-            if (timeLeft <= 0) {
-                clearInterval(timer);
-                showResult('⏰ TIME IS UP!', 'timeout');
-                submitButton.disabled = true;
+            if(timeLeft<=30){
+                timeEl.style.color='#ff0064';
             }
-        }, 1000);
-    });
 
-    // SUBMIT
-    submitButton.addEventListener('click', () => {
-        const entered = codewordInput.value.trim().toUpperCase();
+            if(timeLeft<=0){
+                clearInterval(timer);
+                show("⏰ TIME UP!", "orange");
+            }
+        },1000);
+    },500);
+};
 
-        if (entered === correctCodeword) {
-            clearInterval(timer);
-            showResult('✓ YOU ESCAPED!', 'success');
-            submitButton.disabled = true;
-        } else {
-            showResult('✗ WRONG CODE', 'error');
-        }
-    });
+// SUBMIT
+submit.onclick=()=>{
+    const val=input.value.trim().toUpperCase();
 
-    function showResult(msg, type) {
-        resultDiv.textContent = msg;
-        resultDiv.style.display = 'block';
+    if(val===correct){
+        clearInterval(timer);
+        show("✓ ESCAPED!", "#00ff88");
+    } else {
+        show("✗ WRONG!", "#ff0064");
     }
+};
+
+function show(msg,color){
+    result.textContent=msg;
+    result.style.display='block';
+    result.style.color=color;
+}
 </script>
 
 </body>
