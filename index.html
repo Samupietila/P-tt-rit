@@ -156,6 +156,7 @@ const introText=[
 "> Leppäne on muute iha pelle",
 "> Elikkä 10 min aikaa selvittää pakohuone.",
 "> Kohta tulee ensimmäinen vinkki tähä alle.",
+"> Peli päättyy kun saatte laitettua oikean koodisanan tuoho alle.",
 "> [Täsä on sitte vinkki]"
 ];
 
@@ -214,7 +215,7 @@ startBtn.onclick=()=>{
 document.getElementById('submit').onclick=()=>{
     let val=document.getElementById('code').value.toUpperCase();
 
-    if(val==="REVEAL"){
+    if(val==="TAPIO NISKANEN"){
         clearInterval(timer);
         show("😈 OIKEIN!!!! PERKELE VIE JÄTKÄT PÄÄSITTE LÄPITE!.", "#00ff88");
     } else {
