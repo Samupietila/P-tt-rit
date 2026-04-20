@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ESCAPE TERMINAL</title>
+<title>PAKOHUONE JA SILLEE</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -118,20 +118,20 @@ button.submit{
 <div class="stars" id="stars"></div>
 
 <div class="container">
-<h1>⚡ SYSTEM BREACH ⚡</h1>
-<div class="subtitle">>> unauthorized idiot detected <<</div>
+<h1>⚡ SUPER SIISTI PAKOHUONEJUTTU! ⚡</h1>
+<div class="subtitle">>> LIEKÖ PÄÄSETTE IKINÄ POIS<<</div>
 
-<button id="startButton">▶ ENTER SYSTEM</button>
+<button id="startButton">▶ ALOTETTAAHA TÄSTÄ.</button>
 
 <div id="game" style="display:none;">
 
 <div id="intro"></div>
 
-<div id="time">300</div>
+<div id="time">600</div>
 
 <div class="input-group">
 <input id="code">
-<button class="submit" id="submit">UNLOCK</button>
+<button class="submit" id="submit">LÄHETÄ VASTAUS</button>
 </div>
 
 </div>
@@ -151,12 +151,12 @@ for(let i=0;i<120;i++){
 
 // TYPEWRITER
 const introText=[
-"> booting system...",
-"> scanning brain activity...",
-"> result: questionable intelligence detected",
-"> access denied",
-"> just kidding... or am I?",
-"> find the damn code before system fries you 🔥"
+"> Nonniin pölöjät tästä muuten lähtee...",
+"> Kahotaaha...",
+"> Leppäne on muute iha pelle",
+"> Elikkä 10 min aikaa selvittää pakohuone.",
+"> Kohta tulee ensimmäinen vinkki tähä alle.",
+"> [Täsä on sitte vinkki]"
 ];
 
 function typeText(lines,el,cb){
@@ -180,7 +180,7 @@ function typeText(lines,el,cb){
 }
 
 // GAME
-let time=300;
+let time=600;
 let timer=null;
 
 const startBtn=document.getElementById('startButton');
@@ -204,7 +204,7 @@ startBtn.onclick=()=>{
 
             if(time<=0){
                 clearInterval(timer);
-                show("💀 SYSTEM OWNED YOU. EMBARRASSING.", "red");
+                show("💀 EIIII SSSAAAATANA JÄTKÄT... AIKA LOPPU JA TYÖ HÄVISITTE...", "red");
             }
         },1000);
     });
@@ -216,9 +216,9 @@ document.getElementById('submit').onclick=()=>{
 
     if(val==="REVEAL"){
         clearInterval(timer);
-        show("😈 YOU ESCAPED. LUCKY BASTARD.", "#00ff88");
+        show("😈 OIKEIN!!!! PERKELE VIE JÄTKÄT PÄÄSITTE LÄPITE!.", "#00ff88");
     } else {
-        show("❌ WRONG. MY GRANDMA HACKS BETTER.", "#ff0064");
+        show("❌ VÄÄRÄ VASTAUS, YRITTÄKÄÄHÄ UUELLEE.", "#ff0064");
     }
 };
 
